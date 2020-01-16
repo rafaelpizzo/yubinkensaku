@@ -157,6 +157,9 @@ export default class YubinKensaku {
 		
 		if (isEmpty(parsedCode)) { return false; }
 		this.displayError(null);
+		if (!isEmpty(this.selectors.inputTrigger)) {
+			this.selectors.inputTrigger.classList.add("is-loading");
+		}
 		
 		this.getData(parsedCode)
 			.then(function(response) {
@@ -167,6 +170,9 @@ export default class YubinKensaku {
 					if (parsedCode.length >= self.settings.matchChars) {
 						self.displayError(self.settings.errorMessages.notFound, parsedCode);
 					}
+				}
+				if (!isEmpty(this.selectors.inputTrigger)) {
+					self.selectors.inputTrigger.classList.remove("is-loading");
 				}
 			})
 			.catch(function(error) {
