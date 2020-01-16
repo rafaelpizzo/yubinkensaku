@@ -171,7 +171,7 @@ export default class YubinKensaku {
 						self.displayError(self.settings.errorMessages.notFound, parsedCode);
 					}
 				}
-				if (!isEmpty(this.selectors.inputTrigger)) {
+				if (!isEmpty(self.selectors.inputTrigger)) {
 					self.selectors.inputTrigger.classList.remove("is-loading");
 				}
 			})
