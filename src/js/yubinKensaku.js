@@ -28,7 +28,7 @@ export default class YubinKensaku {
 					notFound: "This is not a valid Postal Code.",
 					failed: "Failed to fetch data."
 				},
-				dataSource: "http://yubinkensaku.local/data/"
+				dataSource: "https://raw.githubusercontent.com/rafaelpizzo/yubinkensaku/master/build/data/"
 			},
 			cachedData: {
 				groups: {}
