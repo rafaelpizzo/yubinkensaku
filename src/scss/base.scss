@@ -1,0 +1,124 @@
+@charset 'utf-8';
+$assetSource: '../';
+$base-font: 'Yu Gothic', YuGothic, 'Meiryo','Verdana','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','Osaka','ＭＳ Ｐゴシック',sans-serif;
+
+/* ====================== CUSTOM FONTS ====================== */
+@font-face {
+	font-family: 'Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 100;
+}
+@font-face {
+	font-family: 'Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 200;
+}
+@font-face {
+	font-family: 'Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 300;
+}
+@font-face {
+	font-family: 'Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'Yu Gothic';
+	src: local('Yu Gothic Bold');
+	font-weight: bold;
+}
+/* ====================== END CUSTOM FONTS ====================== */
+
+/* ====================== FUNCTIONS ====================== */
+.null {
+	display: none !important
+}
+
+.clearfix::before,
+.clearfix::after {
+	content: ' ';
+	clear: both;
+	display: table;
+}
+
+.clearfix::after {
+	clear: both;
+}
+/* ====================== END FUNCTIONS ======================*/
+
+/* ====================== BASE ======================*/
+html,
+body,
+.viewport {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	min-height: 100vh;
+	font-family: $base-font;
+	font-size: 100%;
+	font-size: 16px;
+	color: #fff;
+	font-weight: 400;
+	background-color: #fef7fa;
+	color: #808080;
+	margin: 0;
+	padding: 0;
+
+	/* 日本語改善 */
+	font-feature-settings: 'palt' 1;
+}
+
+a:focus,
+button:focus {
+	outline:0
+}
+
+a,
+a:link,
+a:visited {
+	color: #595857;
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: #182f84;
+	outline: 0;
+}
+
+a:link img {
+	border: 0;
+}
+
+:focus { outline:none; }
+::-moz-focus-inner { border:0; }
+
+svg {
+	width: 100%;
+}
+/* ====================== END BASE ======================*/
+
+/* ====================== LAYOUT ======================*/
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+	font-size: 1em;
+	font-weight: normal;
+	line-height: 1.6em;
+	margin: 0;
+}
+/* ====================== END LAYOUT ======================*/
+
+
+/* ====================== HEADER ======================*/
+header {}
+/* ====================== END HEADER ======================*/
+
+
+/* ====================== CONTENT ======================*/
+
+/* ====================== END CONTENT  ======================*/

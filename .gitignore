@@ -1,0 +1,15 @@
+*.lock
+*.DS_Store
+*.map
+
+node_modules
+vendor
+yarn-error.log
+
+/data/export/*
+
+/_server/
+/_old/
+/_project/
+/_proj/
+/_tmp/

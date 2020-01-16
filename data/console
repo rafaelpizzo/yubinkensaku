@@ -1,0 +1,31 @@
+<?php
+
+require_once(__DIR__.'/vendor/autoload.php');
+require_once(__DIR__."/modules/CSVImporter.php");
+require_once(__DIR__."/modules/AddressParser.php");
+
+echo "Clearing export folder...\n";
+foreach(glob(__DIR__."/export/*") as $file){ unlink($file); }
+
+echo "Exporting new JSON files...\n";
+$addressParser = (
+		new AddressParser(
+			array(
+				'source' 	=> __DIR__ . "/src/nihon-yubin-romaji.csv",
+				"settings"	=> array(),
+				'structure' => array(
+					"id" => 0,
+					"jp_region" => 1,
+					"jp_locality" => 2,
+					"jp_street" => 3,
+					"ro_region" => 4,
+					"ro_locality" => 5,
+					"ro_street" => 6
+				)
+			)
+		)
+	)->import(array(
+		'debugMode' => false
+	));
+	
+echo "Done.\n";

@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\Dotenv\Dotenv;
+
+set_time_limit(0);
+
+require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/Kernel.php';
+
+$input = new ArgvInput();
+
+umask(0000);
+
+if (class_exists(Debug::class)) {
+    Debug::enable();
+}
+
+$kernel = new Kernel('dev', true);
+$application = new Application($kernel);
+$application->run($input);

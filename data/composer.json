@@ -1,0 +1,9 @@
+{
+  "name": "rafaelpizzo/yubinkensaku",
+  "description": "YubinKensaku",
+  "repositories": [],
+  "extra": {},
+  "require": {
+    "goodby/csv": "^1.3"
+  }
+}
