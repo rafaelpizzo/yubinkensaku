@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node ./compiler/dev.js",
     "build": "cross-env NODE_ENV=production node ./compiler/build.js",
-    "postinstall": "npm run build"
   },
   "author": "Rafael Pizzo <http://www.rafaelpizzo.com>",
   "homepage": "https://github.com/rafaelpizzo/yubinkensaku",
