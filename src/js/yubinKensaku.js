@@ -165,7 +165,7 @@ export default class YubinKensaku {
 		this.getData(parsedCode)
 			.then(function(response) {
 				if (!isEmpty(self.selectors.inputTrigger)) {
-					self.selectors.inputTrigger.classList.toggle("is-loading", true);
+					self.selectors.inputTrigger.classList.toggle("is-loading", false);
 				}
 				if (response.hasOwnProperty(parsedCode)) {
 					self.processAddress(response[parsedCode]);
