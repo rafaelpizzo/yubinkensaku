@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * YubinKensaku 0.0.2
+ * YubinKensaku 0.0.3
  *
  * Author Rafael Pizzo <http://www.rafaelpizzo.com/>
  */
@@ -86,7 +86,7 @@ export default class YubinKensaku {
 			}
 			
 			
-			if (!isEmpty(this.selectors.inputCode.value) && this.selectors.inputCode.value.length >= this.settings.minChars) {
+			if (!isEmpty(this.selectors.inputCode.value) && this.selectors.inputCode.value.length >= this.settings.minChars && this.settings.autosearch) {
 				this.getAddress(this.selectors.inputCode.value);
 			}
 		}
