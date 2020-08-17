@@ -103,7 +103,7 @@ export default class YubinKensaku {
 		[].forEach.call(this.selectors.dataFields, function(dataField) {
 			var fieldKey = dataField.getAttribute("yubin-field");
 			if (fieldKey == "region" && self.settings.appendRegions) {
-				for(var i = 0, length1 = self.settings.regions.length; i < length1; i++){
+				for (var i = 0; i < self.settings.regions.length; i++) {
 					var regionOption = document.createElement("option");
 					regionOption.setAttribute("value", self.settings.regions[i]);
 					regionOption.innerText = self.settings.regions[i];
@@ -208,6 +208,7 @@ export default class YubinKensaku {
 	}
 	
 	assignValue(node, value) {
+		value = value.replace("　", "");
 		switch (node.tagName.toLowerCase()) {
 			case "select":
 			case "input":
