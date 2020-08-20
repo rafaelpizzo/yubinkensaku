@@ -208,7 +208,9 @@ export default class YubinKensaku {
 	}
 	
 	assignValue(node, value) {
-		value = value?.replace("　", "");
+		if(!isEmpty(value)) {
+			value = value.replace("　", "");
+		}
 		switch (node.tagName.toLowerCase()) {
 			case "select":
 			case "input":
