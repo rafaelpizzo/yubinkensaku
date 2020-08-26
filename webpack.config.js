@@ -151,8 +151,6 @@ module.exports = {
 		!DEV && new CleanWebpackPlugin([paths.appBuild]),
 		new CopyWebpackPlugin([
 			{ from:'demo', to: './' },
-			{ from:'src/img', to: 'img' },
-			{ from:'src/media', to: 'media' },
 			{ from:'data/export', to: 'data' }
 		]),
 		new MiniCssExtractPlugin({

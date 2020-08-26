@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * YubinKensaku 0.0.3
+ * YubinKensaku 0.0.5
  *
  * Author Rafael Pizzo <http://www.rafaelpizzo.com/>
  */
@@ -30,7 +30,9 @@ export default class YubinKensaku {
 				},
 				dataSource: "https://raw.githubusercontent.com/rafaelpizzo/yubinkensaku/master/build/data/"
 			},
+			eventListeners: [],
 			cachedData: {
+				isValid: false,
 				groups: {}
 			}
 		}
@@ -49,8 +51,27 @@ export default class YubinKensaku {
 		this.init();
 	}
 	
+	get isValid() {
+		return this.cachedData.isValid;
+	}
+	
 	init() {
 		this.bindElements();
+	}
+	
+	on(eventName, callback) {
+		if (typeof callback == "function") {
+			var newEventListener = function(event) { callback(event.detail); }
+			this.element.addEventListener("yubin:"+eventName, newEventListener);
+			this.eventListeners.push({
+				eventName: "yubin:"+eventName,
+				eventCallback: newEventListener
+			});
+		} else {
+			throw new Error('EventListener callback function is invalid.');
+		}
+		
+		return this;
 	}
 	
 	bindElements() {
@@ -154,6 +175,7 @@ export default class YubinKensaku {
 	getAddress(code) {
 		const self = this;
 		const parsedCode = this.parseCode(code);
+		let resolvedAddress = {};
 		
 		if (isEmpty(parsedCode)) { return false; }
 		this.displayError(null);
@@ -168,15 +190,24 @@ export default class YubinKensaku {
 					self.selectors.inputTrigger.classList.toggle("is-loading", false);
 				}
 				if (response.hasOwnProperty(parsedCode)) {
-					self.processAddress(response[parsedCode]);
+					self.cachedData.isValid = true;
+					resolvedAddress = self.processAddress(response[parsedCode]);
 				} else {
-					self.processAddress(null);
+					self.cachedData.isValid = false;
+					resolvedAddress = self.processAddress(null);
 					if (parsedCode.length >= self.settings.matchChars) {
 						self.displayError(self.settings.errorMessages.notFound, parsedCode);
 					}
 				}
+				
+				self.dispatchEvent("yubin:fetch", self.element, {
+					isValid: self.isValid,
+					code: parsedCode,
+					address: resolvedAddress,
+				});
 			})
 			.catch(function(error) {
+				self.cachedData.isValid = false;
 				self.displayError(self.settings.errorMessages.failed, error);
 			});
 	}
@@ -205,11 +236,14 @@ export default class YubinKensaku {
 				}
 			});
 		}
+		
+		return addressData;
 	}
 	
 	assignValue(node, value) {
+		//Most old japanese systems does not allow spaces in addresses.
 		if(!isEmpty(value)) {
-			value = value.replace("　", "");
+			value = value.replace(/　/g, '');
 		}
 		switch (node.tagName.toLowerCase()) {
 			case "select":
@@ -232,6 +266,7 @@ export default class YubinKensaku {
 		}
 	}
 	
+	//Force a real text-input change event for postal-code field.
 	dispatchChangeEvent(element) {
 		if ("createEvent" in document) {
 			var event = document.createEvent("HTMLEvents");
@@ -240,5 +275,26 @@ export default class YubinKensaku {
 		} else {
 			element.fireEvent("onchange");
 		}
+	}
+	
+	//Dispatch custom events
+	dispatchEvent(eventNamespace, eventTarget, eventData = []) {
+		return this.element.dispatchEvent(new CustomEvent(eventNamespace, {
+			detail: {
+				target: eventTarget,
+				value: eventData
+			}
+		}));
+	}
+	
+	destroy() {
+		for (var i = 0; i < this.eventListeners.length; i++) {
+			this.element.removeEventListener(
+				this.eventListeners[i].eventName,
+				this.eventListeners[i].eventCallback
+			);
+			this.eventListeners[i] = null;
+		}
+		this.eventListeners = [];
 	}
 };

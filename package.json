@@ -1,6 +1,6 @@
 {
   "name": "yubinkensaku",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node ./compiler/dev.js",
