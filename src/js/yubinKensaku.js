@@ -200,7 +200,7 @@ export default class YubinKensaku {
 					}
 				}
 				
-				self.dispatchEvent("yubin:fetch", self.element, {
+				self.dispatchEvent("yubin:fetch", self.selectors.inputCode, {
 					isValid: self.isValid,
 					code: parsedCode,
 					address: resolvedAddress,
